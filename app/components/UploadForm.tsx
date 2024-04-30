@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import UploadIcon from './uploadIcon'
 import { ChangeEvent } from "react";
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 
 const UploadForm = () => {
 
     const [uploading, setIsUploading] = useState<Boolean>(false);
+    const router = useRouter();
 
 async function upload(e:ChangeEvent<HTMLInputElement>){
     e.preventDefault();
@@ -24,6 +26,8 @@ async function upload(e:ChangeEvent<HTMLInputElement>){
         setIsUploading(false);
 
         console.log(res.data)
+        const newName = res.data.newName;
+        router.push('/'+newName)
     }
 
     }

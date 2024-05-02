@@ -19,3 +19,31 @@ export function clearTranscriptionItems(transcriptionObj:any) {
       })
 
 }
+
+function secondsToHHMMSSMS(time:string){
+  const d = new Date(parseFloat(time) * 1000)
+  return d.toISOString().slice(11,d.toISOString().indexOf("Z")).replace(".",",")
+}
+
+export function transcriptionItemstoSrt(items:Array<any>){
+  let srt = "";
+  let i = 1;
+  items.filter(item => !!item).forEach((item)=>{
+    srt += i + "\n";
+    
+    
+    const {start_time, end_time} = item;
+
+    srt += secondsToHHMMSSMS(start_time) + ' --> ' + secondsToHHMMSSMS(end_time) + '\n';
+
+    
+
+
+    srt+= item.content +"\n";
+    srt += "\n";
+
+    i++;
+  });
+
+  return srt;
+}

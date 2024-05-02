@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import RocketIcon from "./components/rocket";
+import RocketIcon from "../components/rocket";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });

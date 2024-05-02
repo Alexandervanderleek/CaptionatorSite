@@ -50,15 +50,18 @@ async function getTranscriptionfile(filename:string) {
   let transcribeRes = null
   try{
     transcribeRes = await s3client.send(getObjectCommand)
+    
   }catch(e){
-
+    console.log(e)
+    console.log("erroring out")
   }
+
 
   if(transcribeRes?.Body){
-    const result  =  await streamToString(transcribeRes.Body as Stream);
-    console.log(result);
-   
+    return await streamToString(transcribeRes.Body as Stream);
   }
+
+  return null
 
 }
 
@@ -105,8 +108,14 @@ export async function GET(request: Request) {
 
   //find ready transription
 
-  await getTranscriptionfile(filename||"")
-
+  const transcription = await getTranscriptionfile(filename||"")
+  if(transcription){
+    return Response.json({
+      status: 'COMPLETED',
+      transcription: JSON.parse(transcription as string)
+    })
+  }
+ 
   //check if already have job
 
   const existingJob = await getJob(filename || "");

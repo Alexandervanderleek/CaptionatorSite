@@ -26,7 +26,7 @@ const TranscriptionEditor = ({awsTranscribeItems, setAwsTranscribeOptions}:Props
             <div>Content</div>
           </div>
           {awsTranscribeItems.length > 0 && (
-            <div>
+            <div className='h-48 sm:h-auto overflow-y-scroll sm:overflow-auto'>
               {awsTranscribeItems.map((item,key) => (
                 <div key={key}>
                   <TranscriptionItem

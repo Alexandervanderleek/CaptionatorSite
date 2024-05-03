@@ -35,7 +35,7 @@ async function upload(e:ChangeEvent<HTMLInputElement>){
   return (
     <>
         {uploading && (
-            <div className='bg-black/85 text-white fixed inset-0 flex items-center'>
+            <div className='bg-black/85 text-white absolute z-10 inset-0 flex items-center'>
                 <div className='w-full text-center font-bold'>
                     <h2 className='text-4xl mb-4'>Uploading</h2>
                     <h3 className='text-xl'>Please Wait</h3>
